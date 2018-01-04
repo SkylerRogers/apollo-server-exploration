@@ -1,9 +1,9 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
-import { schema } from './src/schema';
+import { schema } from './schema';
 
-const { port = 3000, NODE_ENV = 'development' } = process.env;
+const { PORT = 3000, NODE_ENV = 'development' } = process.env;
 const app = express();
 
 // Server Config
@@ -17,4 +17,4 @@ const config = {
 app.use('/graphql', bodyParser.json(), graphqlExpress({ schema, ...config }));
 app.get('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
 
-app.listen(port);
+app.listen(PORT, () => console.log(`server running on port ${PORT}`));
